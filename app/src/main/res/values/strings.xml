@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Tiger Cam</string>
+    <string name="hello_world">Hello</string>
+    <string name="CameraImage">CameraImage</string>
+    <string name="btnIntend">Take (big) Picture</string>
+    <string name="btnIntendS">Take (small) Picture</string>
+    <string name="btnIntendV">Take Video</string>
+    <string name="cannot">Cannot</string>
+    <string name="album_name">Tiger Album</string>
+    <string name="hello">Hello World, PhotoIntentActivity!</string>
+    <string name="done">done</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="button_show">Show</string>
+    <string name="button_hide">Change style</string>
+
+    <string name="sum_fragments">Usage of ShowcaseView with fragments</string>
+    <string name="title_fragments">Fragments</string>
+
+    <string name="showcase_fragment_title">ShowcaseView and Fragments?</string>
+    <string name="showcase_fragment_message">Click the button to find out whether this works with Fragments, too.</string>
+
+    <string name="does_really_work_with_fragments">Show toast</string>
+
+
+    <string name="administrator">Administrator #%1$d</string>
+    <string name="skip">Skip</string>
+    <string name="simple_views">Simple Views</string>
+    <string name="fragments">Fragments</string>
+
+    <string name="showcase_fragment_title_2">Even works with transactions</string>
+    <string name="showcase_fragment_message_2">Just remember to create the ShowcaseView during or after onActivityCreated()</string>
+
+
+    <string name="capture_image">capture_image</string>
+    <string name="capturing_image">capturing_image</string>
+    <string name="recapture_image">recapture_image</string>
+    <string name="edit">Edit</string>
+    <string name="restart">Restart</string>
+    <string name="selectFromGallery">Gallery</string>
+    <string name="showcase_main_title">Showcase Sample</string>
+    <string name="showcase_main_message">Press the button showcased to change the showcase\'s style</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rel_camera"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ctd.solutions.tigercam.com.CameraActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.flurgle.camerakit.CameraView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            app:ckCropOutput="false"
+            app:ckFacing="back"
+            app:ckFlash="off"
+            app:ckFocus="off"
+            app:ckJpegQuality="100"
+            app:ckMethod="standard" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/flash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/flash_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@mipmap/ic_flash_off"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/flash_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@mipmap/ic_flash_on"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/flash_auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@mipmap/ic_flash_auto"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp">
+
+        <ImageView
+            android:id="@+id/gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:adjustViewBounds="true"
+            android:background="@mipmap/ic_gallery"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/shutter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:adjustViewBounds="true"
+            android:background="@mipmap/ic_camera"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/selfie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:adjustViewBounds="true"
+            android:background="@mipmap/ic_selfie"
+            android:scaleType="centerCrop" />
+    </RelativeLayout>
+
+</RelativeLayout>

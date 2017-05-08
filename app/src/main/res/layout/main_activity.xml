@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:baselineAligned="true">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.19"
+        android:background="@android:color/transparent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true">
+    </android.support.v4.view.ViewPager>
+
+    <ImageButton
+        android:id="@+id/btnRestart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="right"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="false"
+        android:background="@android:color/transparent"
+        android:onClick="onClick"
+        android:padding="5dp"
+        android:src="@mipmap/ic_cancel"
+        android:text="@string/restart"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/btnShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/btnRestart"
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        android:background="@android:color/transparent"
+        android:onClick="onClick"
+        android:padding="5dp"
+        android:src="@mipmap/ic_share"
+        android:text="Share"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/btnEdit"
+        style="@android:style/Theme.Translucent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnShare"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/btnShare"
+        android:layout_toStartOf="@+id/btnShare"
+        android:background="#00ffffff"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:src="@mipmap/ic_edit"
+        android:text="@string/edit"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+
+    <ImageButton
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/pager"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/pager"
+        android:layout_gravity="left"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@android:color/transparent"
+        android:onClick="onClick"
+        android:padding="5dp"
+        android:src="@mipmap/ic_save"
+        android:text="Save"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+</RelativeLayout>

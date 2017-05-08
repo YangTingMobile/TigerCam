@@ -1,0 +1,6 @@
+pw to key: ripchris6
+key alias: steve
+
+both passwords are ripchris6
+
+generated under java 1.8
