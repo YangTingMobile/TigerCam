@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "1032086636684",
+    "firebase_url": "https://substantial-77299.firebaseio.com",
+    "project_id": "substantial-77299",
+    "storage_bucket": "substantial-77299.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032086636684:android:f8821700454c718d",
+        "android_client_info": {
+          "package_name": "com.runit.Substantial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032086636684-munst2nq8h3a44gno9l7oi33lfoctkh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMVI4UfqO8v_Mfm20O8CRFr7_hK_rWvSc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032086636684:android:2a7f1360268dc2de",
+        "android_client_info": {
+          "package_name": "ctd.solutions.tigercam.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032086636684-munst2nq8h3a44gno9l7oi33lfoctkh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMVI4UfqO8v_Mfm20O8CRFr7_hK_rWvSc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
