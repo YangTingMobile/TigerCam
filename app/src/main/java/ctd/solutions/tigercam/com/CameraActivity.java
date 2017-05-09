@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.media.MediaActionSound;
 import android.net.Uri;
 import android.os.Environment;
@@ -190,8 +191,19 @@ public class CameraActivity extends AppCompatActivity implements View.OnLayoutCh
                         ResultHolder.setNativeCaptureSize(mCamera.getCaptureSize());
                         ResultHolder.setTimeToCallback(callbackTime - startTime);
 
-                        if (bitmap != null)
-                            onCaptureImageResult(bitmap);
+                        if (bitmap != null) {
+                            if (bitmap.getWidth() > bitmap.getHeight()) {
+                                Bitmap bMapRotate = null;
+                                Matrix mat = new Matrix();
+                                mat.postRotate(90);
+                                bMapRotate = Bitmap.createBitmap(bitmap, 0, 0,bitmap.getWidth(),bitmap.getHeight(), mat, true);
+                                bitmap.recycle();
+                                bitmap = null;
+                                onCaptureImageResult(bMapRotate);
+                            } else {
+                                onCaptureImageResult(bitmap);
+                            }
+                        }
                     }
                 });
                 mCamera.captureImage();

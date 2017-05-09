@@ -65,8 +65,11 @@ public class SimpleViewsFragment extends Fragment {
     }
 
     private void skipToMainActivity() {
-        Intent goToMainActivityIntent = new Intent(getActivity(), MainActivity.class);
+//        Intent goToMainActivityIntent = new Intent(getActivity(), MainActivity.class);
+        Intent goToMainActivityIntent = new Intent(getActivity(), CameraActivity.class);
+        goToMainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(goToMainActivityIntent);
+        getActivity().finish();
     }
 
     @Override

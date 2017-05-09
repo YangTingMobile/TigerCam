@@ -3,6 +3,7 @@ package ctd.solutions.tigercam.com;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,6 +36,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.adobe.creativesdk.aviary.AdobeImageIntent;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -47,6 +57,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import ctd.solutions.tigercam.com.model.Upload;
 
 public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
 
@@ -63,6 +75,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     private ImageButton btnRestart, btnSave, btnShare, btnEdit;
     private ImageView ivPhoto;
     private Button btnSelectFromGallery;
+    private ProgressDialog progressDialog;
     private String mCurrentPhotoPath;
     private static final String JPEG_FILE_PREFIX = "IMG_";
     private static final String JPEG_FILE_SUFFIX = ".jpg";
@@ -70,6 +83,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     public static final String TAG = "MainActivity";
     File image;
     String strMethod, strImagePath;
+    ArrayList<String> mFilters = new ArrayList<String>();
 
     private View mContentView;
     private final Handler mHideHandler = new Handler();
@@ -100,6 +114,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
             hide();
         }
     };
+
+    private DatabaseReference mDatabase;
 
 
     @Override
@@ -153,14 +169,9 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 //                startActivity(intent);
 
                 try {
-                    if (strMethod.equals("0")) {
-                        finish();
-                    } else {
-                        Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
+                    Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                    startActivity(intent);
+                    finish();
                 } catch (Exception e) {
                     Intent intent = new Intent(MainActivity.this, CameraActivity.class);
                     startActivity(intent);
@@ -221,6 +232,35 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
             mPager = (ViewPager) findViewById(R.id.pager);
             mPager.setAdapter(cAdapter);
         }
+
+        onDownloadFilter();
+    }
+
+    private void onDownloadFilter() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+        mDatabase = FirebaseDatabase.getInstance().getReference("TigerCam");
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                //dismissing the progress dialog
+                progressDialog.dismiss();
+
+                //iterating through all the values in database
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Upload upload = postSnapshot.getValue(Upload.class);
+                    mFilters.add(upload.getUrl());
+                }
+                //creating adapter
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                progressDialog.dismiss();
+            }
+        });
     }
 
     @Override
