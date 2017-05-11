@@ -128,6 +128,10 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+
         mContentView = findViewById(R.id.layout);
 
         if (checkPermissionsAndRequest()) {
@@ -222,17 +226,13 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     }
 
     private void onDownloadFilter() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait...");
-        progressDialog.show();
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 //dismissing the progress dialog
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
 
                 //iterating through all the values in database
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
@@ -304,6 +304,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
                 mPager.setAdapter(cAdapter);
             }
         }
+
+        progressDialog.dismiss();
     }
 
     @Override
