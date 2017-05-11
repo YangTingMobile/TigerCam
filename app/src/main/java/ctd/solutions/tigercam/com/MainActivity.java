@@ -267,8 +267,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
                     mAdapter = new MyAdapter(getSupportFragmentManager(), bundle, mFilters);
                     mPager = (ViewPager) findViewById(R.id.pager);
-                    mPager.setAdapter(mAdapter);
                     mPager.setOffscreenPageLimit(1);
+                    mPager.setAdapter(mAdapter);
                 }
             } else {
                 mCurrentPhotoPath = strImagePath;
@@ -277,7 +277,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
                 mAdapter = new MyAdapter(getSupportFragmentManager(), bundle1, mFilters);
                 mPager = (ViewPager) findViewById(R.id.pager);
-                mPager.setAdapter(cAdapter);
+                mPager.setAdapter(mAdapter);
             }
         } else {
             if (strMethod.equals("0")) {
@@ -293,7 +293,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
                     oAdapter = new OfflineAdapter(getSupportFragmentManager(), bundle, itemData);
                     mPager = (ViewPager) findViewById(R.id.pager);
-                    mPager.setAdapter(mAdapter);
+                    mPager.setAdapter(oAdapter);
                 }
             } else {
                 mCurrentPhotoPath = strImagePath;
@@ -302,7 +302,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
                 oAdapter = new OfflineAdapter(getSupportFragmentManager(), bundle1, itemData);
                 mPager = (ViewPager) findViewById(R.id.pager);
-                mPager.setAdapter(cAdapter);
+                mPager.setAdapter(oAdapter);
             }
         }
 
@@ -736,9 +736,9 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         Bundle bundle2 = new Bundle();
         bundle2.putString("photo", path);
 //        eAdapter = new MyAdapter(getSupportFragmentManager(), bundle2, itemData);
-        oeAdapter = new OfflineAdapter(getSupportFragmentManager(), bundle2, itemData);
+        mAdapter = new MyAdapter(getSupportFragmentManager(), bundle2, mFilters);
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(eAdapter);
+        mPager.setAdapter(mAdapter);
     }
 
     private void handleSelectPhoto(String path) {
@@ -748,7 +748,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 //        cAdapter = new MyAdapter(getSupportFragmentManager(), bundle1, itemData);
         ocAdapter = new OfflineAdapter(getSupportFragmentManager(), bundle1, itemData);
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(cAdapter);
+        mPager.setAdapter(ocAdapter);
     }
 
     class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
