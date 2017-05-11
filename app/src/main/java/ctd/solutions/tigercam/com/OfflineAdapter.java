@@ -62,7 +62,7 @@ public class OfflineAdapter extends FragmentStatePagerAdapter {
                 Log.d("", "no case");
                 OfflineImageFragment imageFragment18 =  new OfflineImageFragment();
                 Random random = new Random();
-                int n = random.nextInt(9)+ 1;
+                int n = random.nextInt(3)+ 1;
                 imageFragment18.setImageList(itemData.get(0));
                 imageFragment18.setArguments(this.fragmentBundle);
                 return imageFragment18;

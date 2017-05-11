@@ -268,13 +268,14 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
                     mAdapter = new MyAdapter(getSupportFragmentManager(), bundle, mFilters);
                     mPager = (ViewPager) findViewById(R.id.pager);
                     mPager.setAdapter(mAdapter);
+                    mPager.setOffscreenPageLimit(1);
                 }
             } else {
                 mCurrentPhotoPath = strImagePath;
                 Bundle bundle1 = new Bundle();
                 bundle1.putString("photo", strImagePath);
 
-                cAdapter = new MyAdapter(getSupportFragmentManager(), bundle1, mFilters);
+                mAdapter = new MyAdapter(getSupportFragmentManager(), bundle1, mFilters);
                 mPager = (ViewPager) findViewById(R.id.pager);
                 mPager.setAdapter(cAdapter);
             }
@@ -684,11 +685,20 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {    }
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        /*if (position > 0) {
+            mAdapter.nextPage();
+            mPager.setCurrentItem(0, false);
+        }*/
+    }
 
     @Override
     public void onPageSelected(int position) {
         this.position = position;
+        /*if (position > 0) {
+            mAdapter.nextPage();
+            mPager.setCurrentItem(0, false);
+        }*/
         setPage(position);
     }
 
