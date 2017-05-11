@@ -14,10 +14,18 @@ import java.util.Random;
 public class MyAdapter extends FragmentStatePagerAdapter {
 
     Bundle fragmentBundle;
-    private ArrayList<Integer> itemData;
+//    private ArrayList<Integer> itemData;
+    ArrayList<String> itemData = new ArrayList<String>();
 
 
-    public MyAdapter(FragmentManager fragmentManager, Bundle data, ArrayList<Integer> itemData) {
+    /*public MyAdapter(FragmentManager fragmentManager, Bundle data, ArrayList<Integer> itemData) {
+        super(fragmentManager);
+
+        fragmentBundle = data;
+        this.itemData = itemData;
+    }*/
+
+    public MyAdapter(FragmentManager fragmentManager, Bundle data, ArrayList<String> itemData) {
         super(fragmentManager);
 
         fragmentBundle = data;
@@ -26,12 +34,19 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return itemData.size();
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
+        if (position > itemData.size()) position = 0;
+
+        ImageFragment imageFragment = new ImageFragment();
+        imageFragment.setImageList(itemData.get(position));
+        imageFragment.setArguments(fragmentBundle);
+        return imageFragment;
+
+        /*switch (position) {
             case 0: // Fragment # 0 - This will shw image
                 ImageFragment imageFragment = new ImageFragment();
                 imageFragment.setImageList(itemData.get(0));
@@ -56,7 +71,7 @@ public class MyAdapter extends FragmentStatePagerAdapter {
                 imageFragment3.setArguments(this.fragmentBundle);
                 return imageFragment3;
 
-            /*case 4: // Fragment # 1 - This will show image
+            *//*case 4: // Fragment # 1 - This will show image
                 ImageFragment imageFragment4 =  new ImageFragment();
                 imageFragment4.setImageList(itemData.get(4));
                 imageFragment4.setArguments(this.fragmentBundle);
@@ -90,16 +105,16 @@ public class MyAdapter extends FragmentStatePagerAdapter {
                 ImageFragment imageFragment9 =  new ImageFragment();
                 imageFragment9.setImageList(itemData.get(9));
                 imageFragment9.setArguments(this.fragmentBundle);
-                return imageFragment9;*/
+                return imageFragment9;*//*
 
             default:
                 Log.d("", "no case");
                 ImageFragment imageFragment18 =  new ImageFragment();
-                /*Random random = new Random();
-                int n = random.nextInt(9)+ 1;*/
+                *//*Random random = new Random();
+                int n = random.nextInt(9)+ 1;*//*
                 imageFragment18.setImageList(itemData.get(0));
                 imageFragment18.setArguments(this.fragmentBundle);
                 return imageFragment18;
-        }
+        }*/
     }
 }

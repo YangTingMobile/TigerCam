@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CameraFilters.iml" filepath="$PROJECT_DIR$/CameraFilters.iml" />
       <module fileurl="file://$PROJECT_DIR$/CameraFilters-master.iml" filepath="$PROJECT_DIR$/CameraFilters-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TigerCam.iml" filepath="$PROJECT_DIR$/TigerCam.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/camerakit/camerakit.iml" filepath="$PROJECT_DIR$/camerakit/camerakit.iml" />
     </modules>

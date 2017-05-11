@@ -4,13 +4,10 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -19,15 +16,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class ImageFragment extends Fragment {
-//    private Integer itemData;
-    private String itemData;
+public class OfflineImageFragment extends Fragment {
+    private Integer itemData;
     ImageView imageView;
     Bitmap imageBitmap;
     ImageView imageView1;
@@ -67,7 +61,7 @@ public class ImageFragment extends Fragment {
         this.itemData = integer;
     }*/
 
-    public void setImageList(String integer) {
+    public void setImageList(Integer integer) {
         this.itemData = integer;
     }
 
@@ -174,11 +168,9 @@ public class ImageFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (MainActivity.class.isInstance(getActivity())) {
-            /*final int resId = itemData;
+            final int resId = itemData;
             // Call out to MainActivity to load the bitmap in a background thread
-            ((MainActivity) getActivity()).loadBitmap(resId, imageView1);*/
-
-            Picasso.with((MainActivity) getActivity()).load(itemData).into(imageView1);
+            ((MainActivity) getActivity()).loadBitmap(resId, imageView1);
         }
     }
 

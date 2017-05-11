@@ -67,6 +67,9 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     MyAdapter mAdapter;
     MyAdapter cAdapter;
     MyAdapter eAdapter;
+    OfflineAdapter oAdapter;
+    OfflineAdapter ocAdapter;
+    OfflineAdapter oeAdapter;
     ViewPager mPager;
     private static final int ACTION_TAKE_PHOTO_B = 1;
     private Images imageId;
@@ -84,6 +87,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     File image;
     String strMethod, strImagePath;
     ArrayList<String> mFilters = new ArrayList<String>();
+    private int iFirst = 0;
+    private String strLink;
 
     private View mContentView;
     private final Handler mHideHandler = new Handler();
@@ -208,39 +213,20 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
             }
         });
 
-        if (strMethod.equals("0")) {
-            mCurrentPhotoPath = strImagePath;
-            if (mCurrentPhotoPath != null) {
-                Log.d("This is the Path/n/n", mCurrentPhotoPath);
-                getPhotoFile(mCurrentPhotoPath);
-
-                String file = getPhotoFile(mCurrentPhotoPath);
-
-                Bundle bundle = new Bundle();
-                bundle.putString("photo", file);
-
-                mAdapter = new MyAdapter(getSupportFragmentManager(), bundle, itemData);
-                mPager = (ViewPager) findViewById(R.id.pager);
-                mPager.setAdapter(mAdapter);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                onDownloadFilter();
             }
-        } else {
-            mCurrentPhotoPath = strImagePath;
-            Bundle bundle1 = new Bundle();
-            bundle1.putString("photo", strImagePath);
-
-            cAdapter = new MyAdapter(getSupportFragmentManager(), bundle1, itemData);
-            mPager = (ViewPager) findViewById(R.id.pager);
-            mPager.setAdapter(cAdapter);
-        }
-
-        onDownloadFilter();
+        });
     }
 
     private void onDownloadFilter() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
-        mDatabase = FirebaseDatabase.getInstance().getReference("TigerCam");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -250,10 +236,13 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
                 //iterating through all the values in database
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    Upload upload = postSnapshot.getValue(Upload.class);
-                    mFilters.add(upload.getUrl());
+                    strLink = postSnapshot.getValue().toString();
+                    iFirst = strLink.indexOf("http");
+                    strLink = strLink.substring(iFirst, strLink.length() - 1);
+                    mFilters.add(strLink);
                 }
                 //creating adapter
+                setAdapter();
             }
 
             @Override
@@ -261,6 +250,60 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
                 progressDialog.dismiss();
             }
         });
+    }
+
+    private void setAdapter() {
+        if (mFilters != null && mFilters.size() > 0) {
+            if (strMethod.equals("0")) {
+                mCurrentPhotoPath = strImagePath;
+                if (mCurrentPhotoPath != null) {
+                    Log.d("This is the Path/n/n", mCurrentPhotoPath);
+                    getPhotoFile(mCurrentPhotoPath);
+
+                    String file = getPhotoFile(mCurrentPhotoPath);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("photo", file);
+
+                    mAdapter = new MyAdapter(getSupportFragmentManager(), bundle, mFilters);
+                    mPager = (ViewPager) findViewById(R.id.pager);
+                    mPager.setAdapter(mAdapter);
+                }
+            } else {
+                mCurrentPhotoPath = strImagePath;
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("photo", strImagePath);
+
+                cAdapter = new MyAdapter(getSupportFragmentManager(), bundle1, mFilters);
+                mPager = (ViewPager) findViewById(R.id.pager);
+                mPager.setAdapter(cAdapter);
+            }
+        } else {
+            if (strMethod.equals("0")) {
+                mCurrentPhotoPath = strImagePath;
+                if (mCurrentPhotoPath != null) {
+                    Log.d("This is the Path/n/n", mCurrentPhotoPath);
+                    getPhotoFile(mCurrentPhotoPath);
+
+                    String file = getPhotoFile(mCurrentPhotoPath);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("photo", file);
+
+                    oAdapter = new OfflineAdapter(getSupportFragmentManager(), bundle, itemData);
+                    mPager = (ViewPager) findViewById(R.id.pager);
+                    mPager.setAdapter(mAdapter);
+                }
+            } else {
+                mCurrentPhotoPath = strImagePath;
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("photo", strImagePath);
+
+                oAdapter = new OfflineAdapter(getSupportFragmentManager(), bundle1, itemData);
+                mPager = (ViewPager) findViewById(R.id.pager);
+                mPager.setAdapter(cAdapter);
+            }
+        }
     }
 
     @Override
@@ -452,7 +495,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
             Bundle bundle = new Bundle();
             bundle.putString("photo", file);
 
-            mAdapter = new MyAdapter(getSupportFragmentManager(), bundle, itemData);
+//            mAdapter = new MyAdapter(getSupportFragmentManager(), bundle, itemData);
+            oAdapter = new OfflineAdapter(getSupportFragmentManager(), bundle, itemData);
             mPager = (ViewPager) findViewById(R.id.pager);
             mPager.setAdapter(mAdapter);
         }
@@ -679,7 +723,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     private void handleAdobePhoto(String path) {
         Bundle bundle2 = new Bundle();
         bundle2.putString("photo", path);
-        eAdapter = new MyAdapter(getSupportFragmentManager(), bundle2, itemData);
+//        eAdapter = new MyAdapter(getSupportFragmentManager(), bundle2, itemData);
+        oeAdapter = new OfflineAdapter(getSupportFragmentManager(), bundle2, itemData);
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(eAdapter);
     }
@@ -688,7 +733,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         Bundle bundle1 = new Bundle();
         bundle1.putString("photo", path);
 
-        cAdapter = new MyAdapter(getSupportFragmentManager(), bundle1, itemData);
+//        cAdapter = new MyAdapter(getSupportFragmentManager(), bundle1, itemData);
+        ocAdapter = new OfflineAdapter(getSupportFragmentManager(), bundle1, itemData);
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(cAdapter);
     }
