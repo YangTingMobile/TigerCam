@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.media.MediaActionSound;
 import android.net.Uri;
@@ -92,7 +93,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnLayoutCh
 
     private static final int SELECT_PHOTO = 300;
 
-    private int iFlash = 0;
+    private int iFlash, iSelfie = 0;
 
     private String strImagePath;
 
@@ -186,6 +187,13 @@ public class CameraActivity extends AppCompatActivity implements View.OnLayoutCh
                         super.onPictureTaken(jpeg);
                         long callbackTime = System.currentTimeMillis();
                         Bitmap bitmap = BitmapFactory.decodeByteArray(jpeg, 0, jpeg.length);
+                        if (iSelfie == 1) {
+                            Matrix matrix = new Matrix();
+                            matrix.preScale(-1.0f, 1.0f);
+                            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                        } else {
+
+                        }
                         ResultHolder.dispose();
                         ResultHolder.setImage(bitmap);
                         ResultHolder.setNativeCaptureSize(mCamera.getCaptureSize());
@@ -217,8 +225,10 @@ public class CameraActivity extends AppCompatActivity implements View.OnLayoutCh
             public void onClick(View v) {
                 switch (mCamera.toggleFacing()) {
                     case CameraKit.Constants.FACING_BACK:
+                        iSelfie = 0;
                         break;
                     case CameraKit.Constants.FACING_FRONT:
+                        iSelfie = 1;
                         break;
                 }
             }
