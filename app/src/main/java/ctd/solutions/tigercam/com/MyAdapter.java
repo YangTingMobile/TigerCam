@@ -39,14 +39,16 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        /*if (position > itemData.size()) position = 0;
+        if (position + 1 > itemData.size()) {
+            position = position % (itemData.size());
+        }
 
         ImageFragment imageFragment = new ImageFragment();
         imageFragment.setImageList(itemData.get(position));
         imageFragment.setArguments(fragmentBundle);
-        return imageFragment;*/
+        return imageFragment;
 
-        switch (position) {
+        /*switch (position) {
             case 0: // Fragment # 0 - This will shw image
                 ImageFragment imageFragment = new ImageFragment();
                 imageFragment.setImageList(itemData.get(0));
@@ -71,7 +73,7 @@ public class MyAdapter extends FragmentStatePagerAdapter {
                 imageFragment3.setArguments(this.fragmentBundle);
                 return imageFragment3;
 
-            /*case 4: // Fragment # 1 - This will show image
+            *//*case 4: // Fragment # 1 - This will show image
                 ImageFragment imageFragment4 =  new ImageFragment();
                 imageFragment4.setImageList(itemData.get(4));
                 imageFragment4.setArguments(this.fragmentBundle);
@@ -105,7 +107,7 @@ public class MyAdapter extends FragmentStatePagerAdapter {
                 ImageFragment imageFragment9 =  new ImageFragment();
                 imageFragment9.setImageList(itemData.get(9));
                 imageFragment9.setArguments(this.fragmentBundle);
-                return imageFragment9;*/
+                return imageFragment9;*//*
 
             default:
                 Log.d("", "no case");
@@ -116,6 +118,6 @@ public class MyAdapter extends FragmentStatePagerAdapter {
                 imageFragment18.setImageList(itemData.get(n));
                 imageFragment18.setArguments(this.fragmentBundle);
                 return imageFragment18;
-        }
+        }*/
     }
 }
